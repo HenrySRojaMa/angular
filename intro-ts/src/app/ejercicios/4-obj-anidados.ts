@@ -14,13 +14,13 @@ export class AppComponent {
 
 interface Conocimiento {
   nombre: string;
-  nivel?: number;
+  nivel: number;
 }
 
 interface Persona {
   nombre: string;
   edad: number;
-  conocimientos?: Conocimiento[];
+  conocimientos: Conocimiento[];
   demostrarConocimiento():string;
 }
 
@@ -29,18 +29,18 @@ const uno: Conocimiento = {
   nivel: 2
 }
 const dos: Conocimiento = {
-  nombre: "jquery"
-  //,nivel: 1
+  nombre: "jquery",
+  nivel: 1
 }
 
 const persona:Persona = {
   nombre: "Henry",
-  edad : 26
-  //,conocimientos: [uno, dos]
-  ,demostrarConocimiento():string{
+  edad : 26,
+  conocimientos: [uno, dos],
+  demostrarConocimiento():string{
     let conocimiento:string = this.nombre + " le sabe al ";
-    this.conocimientos?.forEach(element => {
-      conocimiento = conocimiento + element.nombre + ": " +(element.nivel || 0) + " año(s), "
+    this.conocimientos.forEach(element => {
+      conocimiento = conocimiento + element.nombre + ": " +element.nivel + " año(s), "
     });
     return conocimiento;
   }
