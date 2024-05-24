@@ -1,0 +1,16 @@
+<button (click)="eliminarDeLista()">Polimerizacion</button>
+
+<div *ngIf="cementerio!=''; else sideDeck">
+    <h1>Cementerio</h1>
+    <h3>{{cementerio}}</h3>
+</div>
+
+<ng-template #sideDeck>
+    <app-heroes></app-heroes>
+</ng-template>
+
+<p>Listado de Heroes</p>
+
+<ul>
+    <li *ngFor="let hero of heroes; let i=index">{{i}} {{hero}}</li>
+</ul>
