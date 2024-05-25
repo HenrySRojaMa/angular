@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeroesModule } from './Components/heroes.module';
 import { HelpersModule } from './helpers/helpers.module';
+import { YugiohModule } from './yugioh/yugioh.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { HelpersModule } from './helpers/helpers.module';
     BrowserModule,
     AppRoutingModule,
     HeroesModule,
-    HelpersModule
+    HelpersModule,
+    YugiohModule
   ],
   providers: [
     provideClientHydration()
