@@ -1,0 +1,24 @@
+<div class="alert alert-info" role="alert" *ngIf="pais; else elseTemplate">
+    <strong>Espere mi loco!</strong> Carganding...
+</div>
+
+<ng-template #elseTemplate>
+    <div class="card mb-3">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img [src]="pais.flags.png" class="img-fluid rounded-start" [alt]="pais.name.official" />
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">{{pais.name.official}}</h5>
+                    <p class="card-text">
+                        {{ pais | json }}
+                    </p>
+                    <p class="card-text">
+                        <small class="text-muted">Capital: {{pais.capital[0]}}</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

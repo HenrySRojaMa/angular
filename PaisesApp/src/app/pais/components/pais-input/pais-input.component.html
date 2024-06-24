@@ -1,0 +1,4 @@
+<form class="mb-3" autocomplete="off" (ngSubmit)="buscar()">
+    <input [(ngModel)]="query" type="text" class="form-control" name="query" id="query" (input)="escribiendo()"
+        placeholder="{{placeHolder}}" />
+</form>
