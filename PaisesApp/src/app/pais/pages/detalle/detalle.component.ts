@@ -12,6 +12,7 @@ import { NameRps } from '../../interfaces/NameRps.interface';
 export class DetalleComponent implements OnInit {
 
   pais!: NameRps;
+  bandera: boolean= false;
 
   constructor(private route: ActivatedRoute, private paisService: PaisService) { }
 
@@ -23,7 +24,7 @@ export class DetalleComponent implements OnInit {
         tap(console.log)
       )
       .subscribe(
-        resp => { this.pais = resp; },
+        resp => { this.pais = resp[0]; },
         err => { console.log("nada mi pana"); });
     /*
     this.route.params.subscribe(({ id }) => {
@@ -32,6 +33,11 @@ export class DetalleComponent implements OnInit {
         err => { console.log("nada mi pana"); });
     });
     */
+  }
+
+  ver(){
+    console.log(this.pais);
+    this.bandera = true;
   }
 
 }
