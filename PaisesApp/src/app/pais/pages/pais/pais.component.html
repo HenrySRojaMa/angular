@@ -1,6 +1,11 @@
 <h2>Por País</h2>
 
-<app-pais-input placeHolder="Buscar por pais..." (onEnter)="buscar($event)" (onDebounce)="sugerir($event)"></app-pais-input>
+<app-pais-input placeHolder="Buscar por pais..." (onEnter)="buscar($event)"
+    (onDebounce)="sugerir($event)"></app-pais-input>
+<div class="list-group" *ngIf="mostrarSugerencia">
+    <a class="list-group-item list-group-item-action" (click)="buscarSugenrecia(query)" >Buscar {{query}}</a>
+    <a *ngFor="let item of sugerencias" [routerLink]="['/pais',item.cca2]" routerLinkActive="active" class="list-group-item list-group-item-action">{{item.name.official}}</a>
+</div>
 
 <hr>
 

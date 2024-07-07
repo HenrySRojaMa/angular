@@ -24,4 +24,8 @@ export class PaisService {
     return this.http.get<NameRps>(this.host + "/alpha/" + query);
   }
 
+  buscarPaisContinente(query: string): Observable<NameRps[]> {
+    return this.http.get<NameRps[]>(this.host + "/region/" + query);
+  }
+
 }

@@ -1,1 +1,21 @@
-<p>continente works!</p>
+<h2>Por Continente {{query| titlecase}}</h2>
+
+<div class="row">
+    <div class="col" *ngFor="let item of continentes">
+        <button (click)="buscar(item)" [class]="getClass(item)">
+            {{item | titlecase}}
+        </button>
+
+    </div>
+</div>
+
+<hr>
+
+
+<div class="alert alert-danger" role="alert" *ngIf="query==''">
+    <strong>Despierte mi loco!!!</strong> A donde quiere irse aparte de ALV ?
+</div>
+
+<div class="table-responsive-sm" *ngIf="query!=''">
+    <app-pais-tabla [paises]="paises"></app-pais-tabla>
+</div>

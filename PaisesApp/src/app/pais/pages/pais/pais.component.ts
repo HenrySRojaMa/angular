@@ -14,6 +14,8 @@ export class PaisComponent {
   error: boolean = false;
 
   paises: NameRps[] = []
+  sugerencias: NameRps[] = []
+  mostrarSugerencia: boolean = false;
 
   constructor(private paisService: PaisService) { }
 
@@ -28,8 +30,21 @@ export class PaisComponent {
     )
   }
 
-  sugerir(busqueda: string){
+  sugerir(busqueda: string) {
+    if(busqueda!=""){this.mostrarSugerencia = true;}
     this.error = false;
+    this.query = busqueda;
+    this.paises = [];
+    this.paisService.buscarPais(busqueda).subscribe(
+      resp => { this.sugerencias = resp.splice(0,5) },
+      err => { this.error = true; this.sugerencias = [];this.query = busqueda==""?"¯\\_(ツ)_/¯":busqueda; }
+
+    )
+  }
+
+  buscarSugenrecia(query: string){
+    this.buscar(query);
+    this.mostrarSugerencia = false;
   }
 
 }
