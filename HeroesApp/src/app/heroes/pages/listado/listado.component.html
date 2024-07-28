@@ -1,1 +1,7 @@
-<p>listado works!</p>
+<h1>Listado de Cartas</h1>
+<mat-divider></mat-divider>
+<br>
+
+<mat-list fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap.lg="2vw" fxLayoutGap.md="4vw" fxLayoutGap.sm="3vw">
+    <app-cartilla class="example-card" appearance="outlined" fxFlex.lg="18" fxFlex.md="20" fxFlex.sm="30" fxFlex.xs="100" *ngFor="let item of lista" [item]="item"></app-cartilla>
+</mat-list>

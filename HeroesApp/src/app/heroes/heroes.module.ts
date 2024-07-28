@@ -7,6 +7,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { ListadoComponent } from './pages/listado/listado.component';
 import { HeroesRoutingModule } from './heroes-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MaterialModule } from '../material/material.module';
+import { CartillaComponent } from './components/cartilla/cartilla.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,12 +18,15 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     BuscarComponent,
     HeroeComponent,
     HomeComponent,
-    ListadoComponent
+    ListadoComponent,
+    CartillaComponent
   ],
   imports: [
     CommonModule,
     HeroesRoutingModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MaterialModule,
+    FormsModule
   ]
 })
 export class HeroesModule { }

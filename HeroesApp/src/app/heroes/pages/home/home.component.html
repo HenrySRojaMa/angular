@@ -1,5 +1,27 @@
-<h1>Heroes App</h1>
+<mat-sidenav-container fullscreen>
+    <mat-sidenav #sidenav mode="push">
+        <h2>Yu-Gi-Oh Wikia</h2>
+        <mat-nav-list>
+            <a mat-list-item mat-list-item routerLink="./listado" (click)="sidenav.toggle()"> <mat-icon>label</mat-icon>
+                Listado de Héroes</a>
+            <a mat-list-item mat-list-item routerLink="./agregar" (click)="sidenav.toggle()"> <mat-icon>add</mat-icon>
+                Añadir Héroe</a>
+            <a mat-list-item mat-list-item routerLink="./buscar" (click)="sidenav.toggle()"> <mat-icon>search</mat-icon>
+                Buscar Héroe</a>
+        </mat-nav-list>
+    </mat-sidenav>
 
-<hr>
-
-<router-outlet></router-outlet>
+    <mat-toolbar>
+        <button mat-icon-button (click)="sidenav.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <span>Home</span>
+        <span class="spacer"></span>
+        <button mat-icon-button>
+            <mat-icon>logout</mat-icon>
+        </button>
+    </mat-toolbar>
+    <div class="container">
+        <router-outlet></router-outlet>
+    </div>
+</mat-sidenav-container>

@@ -1,1 +1,18 @@
-<p>buscar works!</p>
+<div fxLayout="column">
+    <div fxLayout="row">
+        <h1>Buscador de cartas</h1>
+        <mat-form-field class="example-full-width">
+            <mat-label>Carta</mat-label>
+            <input type="text" placeholder="Draw!" matInput [(ngModel)]="query" (input)="buscando()"
+                [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="opcionSeleccionada( $event)">
+                <mat-option *ngFor="let item of cartas" [value]="item">{{item.nombre}}</mat-option>
+                <mat-option *ngIf="sinSugerencia" [value]="">No hay resultado para {{query}}</mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-divider></mat-divider>
+        <div *ngIf="carta">{{carta|json}}</div>
+    </div>
+</div>
