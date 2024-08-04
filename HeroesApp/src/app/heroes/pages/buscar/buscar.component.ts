@@ -32,6 +32,6 @@ export class BuscarComponent {
     const carta: Carta = event.option.value;
     this.query = carta.nombre;
 
-    this.heroesService.getHeroe(carta.id).subscribe(rpta => this.carta = rpta);
+    this.heroesService.getHeroe(carta.id!).subscribe(rpta => this.carta = rpta);
   }
 }

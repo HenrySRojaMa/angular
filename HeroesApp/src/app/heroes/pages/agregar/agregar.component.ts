@@ -1,10 +1,72 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Carta } from '../../interfaces/heroes.interface';
+import { HeroesService } from '../../services/heroes.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { switchMap, tap } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { MessageModalComponent } from '../../components/message-modal/message-modal.component';
 
 @Component({
   selector: 'app-agregar',
   templateUrl: './agregar.component.html',
   styleUrls: ['./agregar.component.css']
 })
-export class AgregarComponent {
+export class AgregarComponent implements OnInit {
+  Carta: Carta = {
+    id: 0,
+    arquetipo: "",
+    categoria: "",
+    descipcion: "",
+    estadisticas: "",
+    imagen: "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/3c938f85-f834-4bb3-b3b2-97d295769464/dal6wsb-fc4aaba4-d6ff-4029-a83f-9b518abd511d.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sIm9iaiI6W1t7InBhdGgiOiIvZi8zYzkzOGY4NS1mODM0LTRiYjMtYjNiMi05N2QyOTU3Njk0NjQvZGFsNndzYi1mYzRhYWJhNC1kNmZmLTQwMjktYTgzZi05YjUxOGFiZDUxMWQucG5nIn1dXX0._Al6plUB_BwuHO4MI18fPE6GgtgvtaTTUGRHdqVo0sg",
+    nombre: "",
+    tipo: ""
+  }
+  nuevo: boolean = true;
+  accion: string = "";
+  constructor(private heroesService: HeroesService, private route: ActivatedRoute, private router: Router
+    , private snackBar: MatSnackBar, private dialog: MatDialog) {
 
+  }
+
+  ngOnInit(): void {
+    this.route.params
+      .pipe(
+        switchMap(({ id }) => this.heroesService.getHeroe(id)),
+        tap(console.log)
+      )
+      .subscribe(
+        resp => { this.Carta = resp/*[0]*/; this.nuevo = false; this.accion = "Actualizar"; },
+        err => { console.log("nada mi pana"); this.accion = "Ingresar"; });
+  }
+
+  grabar() {
+    if (this.nuevo) {
+      this.heroesService.postHeroe(this.Carta)
+        .subscribe(
+          rpta => { this.router.navigate(['/heroes/editar', rpta.id]); this.mensaje("Ta bien"); },
+          error => this.mensaje("Nel pastel"));
+    } else {
+      this.heroesService.putHeroe(this.Carta).subscribe(rpta => { this.Carta = rpta; this.mensaje("Ta bien"); },
+        error => this.mensaje("Nel pastel"));
+    }
+    console.log(this.Carta);
+  }
+
+  eliminar() {
+    const rpta = this.dialog.open(MessageModalComponent, {width: "20vw", height:"22vh", data: this.Carta.nombre});
+    rpta.afterClosed().subscribe(result=>{
+      if (result == true) {
+        this.heroesService.deleteHeroe(this.Carta.id).subscribe(
+          rpta => { this.router.navigate(['/heroes/listado']); this.mensaje("Ta bien"); },
+          error => this.mensaje("Nel pastel"));
+      }
+    });
+    
+  }
+
+  mensaje(mensaje: string) {
+    this.snackBar.open(mensaje, "Ok", { duration: 3000 });
+  }
 }

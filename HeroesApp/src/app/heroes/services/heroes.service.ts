@@ -24,4 +24,16 @@ export class HeroesService {
   getSugerencia(query: string): Observable<Carta[]> {
     return this.http.get<Carta[]>(this.baseUrl + "/api/Cartas/busqueda?query=" + query);
   }
+
+  postHeroe(Carta: Carta): Observable<Carta> {
+    return this.http.post<Carta>(this.baseUrl + "/api/Cartas/", Carta);
+  }
+  
+  putHeroe(Carta: Carta): Observable<Carta> {
+    return this.http.put<Carta>(this.baseUrl + "/api/Cartas/"+Carta.id, Carta);
+  }
+
+  deleteHeroe(id: number): Observable<any> {
+    return this.http.delete<any>(this.baseUrl + "/api/Cartas/" + id);
+  }
 }

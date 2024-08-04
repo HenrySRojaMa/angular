@@ -10,6 +10,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '../material/material.module';
 import { CartillaComponent } from './components/cartilla/cartilla.component';
 import { FormsModule } from '@angular/forms';
+import { MessageModalComponent } from './components/message-modal/message-modal.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { FormsModule } from '@angular/forms';
     HeroeComponent,
     HomeComponent,
     ListadoComponent,
-    CartillaComponent
+    CartillaComponent,
+    MessageModalComponent
   ],
   imports: [
     CommonModule,
