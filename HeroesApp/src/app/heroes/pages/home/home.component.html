@@ -17,7 +17,8 @@
         </button>
         <span>Home</span>
         <span class="spacer"></span>
-        <button mat-icon-button>
+        <span>{{auth.usuario1}}</span>
+        <button mat-icon-button (click)="logout()">
             <mat-icon>logout</mat-icon>
         </button>
     </mat-toolbar>
