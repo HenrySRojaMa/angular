@@ -10,12 +10,13 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent {
 
   constructor(private router: Router, private authService: AuthService) {
-    
+
   }
 
-  login(){
-    this.authService.getUser(1).subscribe(rpta=>console.log(rpta));
-    this.router.navigate(["./heroes"])
+  login() {
+    this.authService.getUser(1).subscribe(
+      rpta => this.router.navigate(["./heroes"]), 
+      err => console.log("Nel pelao falló esta monda"));
   }
 
 }
